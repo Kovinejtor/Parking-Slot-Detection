@@ -1,0 +1,6 @@
+train: C:/ParkingSlotDetection/datasets/Dataset/train/images
+val: C:/ParkingSlotDetection/datasets/Dataset/valid/images
+test: C:/ParkingSlotDetection/datasets/Dataset/test/images
+
+nc: 2
+names: ['empty', 'occupied']
