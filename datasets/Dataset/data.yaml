@@ -1,5 +1,5 @@
 train: C:/ParkingSlotDetection/datasets/Dataset/train/images
-val: C:/ParkingSlotDetection/datasets/Dataset/valid/images
+val: C:/ParkingSlotDetection/datasets/Dataset/valid/images   #prilikom testiranja staviti /test/ kako bi se na neviđenim podacima provjerili modeli
 test: C:/ParkingSlotDetection/datasets/Dataset/test/images
 
 nc: 2
