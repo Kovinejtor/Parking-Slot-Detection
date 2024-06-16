@@ -116,7 +116,7 @@ Svaki od njih sadrži određene elemente koji su izlazni rezultati njihovog proc
 ## REZULTATI IMPLEMENTACIJE YOLO ALGORITMA
 Za provjeru kvalitete različitih modela se treba koristiti testni skup koji su za model neviđeni podaci. YOLO nudi mogućnost da se s funkcijom predict prikažu te spreme izlazne slike 
 s oznakama koje su rezultat predviđanja modela na neviđeni skup, ali prilikom toga nemamo nikakve izlazne evaluacijske metrike na temelju kojih možemo usporediti modele. 
-U nastavku ću demonstrirati rezultate funkcije predict koristeći najbolji model, ali prvo ću prikazati način za prikaz evaluacijskih metrika na temelju testnog skupa.
+U nastavku ću demonstrirati rezultate funkcije predict koristeći najbolji model, ali prvo ću prikazati način za prikaz evaluacijskih metrika testnog skupa.
 
 U dolje priloženom kodu je moguće vidjeti da sam promijenio za validaciju putanju i to tako da joj putanja referencira testni skup.
 
@@ -130,9 +130,9 @@ names: ['empty', 'occupied']
 ```
 
 
-Izvest će validaciju, ali na testnom skupu te će se saznati evaluacijske metrike. Na GitHub repozitoriju se nalazi nemodificirani data.yaml te u slučaju da čitatelj želi stvoriti validaciju za testni skup podataka onda 
+Izvest će validaciju (tj evaluaciju), ali na testnom skupu te će se saznati evaluacijske metrike. Na GitHub repozitoriju se nalazi nemodificirani data.yaml te u slučaju da čitatelj želi stvoriti evaluaciju za testni skup podataka onda 
 treba samo promijeniti putanju za validaciju kao što je prikazano u gore priloženom kodu. Za prikaz evaluacijskih metrika je potrebno pokrenuti već postojeći kod za validaciju i to je potrebno napraviti za svaki dobiveni model.
-Primjer postojećeg koda koji bi se ponovno trebao pokrenuti za validaciju testnog skupa:
+Primjer postojećeg koda koji bi se ponovno trebao pokrenuti za evaluaciju testnog skupa:
 ```
 best_model_path = 'runs/detect/train/weights/best.pt'
 best_model = YOLO(best_model_path)
@@ -140,28 +140,28 @@ metrics = best_model.val(data='datasets/Dataset/data.yaml', imgsz=640)
 print(metrics)
 ```
 
-Broj instanci u validacijama testnog skupa podataka:
+Broj instanci kod evaluacije testnog skupa podataka:
 ![image](https://github.com/Kovinejtor/Parking-Slot-Detection/assets/95875142/60812aad-5d75-49c6-8ca9-ab051b7442b9)
 
-Broj slojeva, parametara i GFLOPs u validacijama testnog skupa podataka:
+Broj slojeva, parametara i GFLOPs kod evaluacije testnog skupa podataka:
 ![image](https://github.com/Kovinejtor/Parking-Slot-Detection/assets/95875142/a59d6647-4b00-4368-8d5f-cdb328d2c835)
 
-Vrijednosti odaziva u validacijama testnog skupa podataka:
+Vrijednosti odaziva kod evaluacije testnog skupa podataka:
 ![image](https://github.com/Kovinejtor/Parking-Slot-Detection/assets/95875142/928bb198-f9d8-4f65-b9e2-4e9c69bbf49c)
 
-Vrijednosti mAP50 u validacijama testnog skupa podataka:
+Vrijednosti mAP50 kod evaluacije testnog skupa podataka:
 ![image](https://github.com/Kovinejtor/Parking-Slot-Detection/assets/95875142/f1964fed-4219-4986-ba95-229d6e869eed)
 
-Vrijednosti mAP50-95 u validacijama testnog skupa podataka:
+Vrijednosti mAP50-95 kod evaluacije testnog skupa podataka:
 ![image](https://github.com/Kovinejtor/Parking-Slot-Detection/assets/95875142/9886c892-8630-4c3c-8ac8-800f36e25a18)
 
-Izlaz funkcije predict je slika s predviđenim klasama i njihovim pozicijama. Primjer implementacije predikcije/treniranja:
+Izlaz funkcije predict je slika s predviđenim klasama i njihovim pozicijama. Primjer implementacije predikcije/testiranja:
 ```
 test_results = best_model.predict(source='datasets/Dataset/test/images', imgsz=640, conf=0.25, save=True, save_dir='output/predictions')
 ```
 
 Model YOLOv8m koji je treniran s pretreniranim modelom i s veličinom slika 480×480 je pokazao najbolji rezultat tijekom procesa treninga te validacije, 
-ali i validacije s testnim skupom podataka što je bilo očekivano sukladno tome što je najveći te najpreciznniji model među korištenima. U nastavku su prikazane samo neke 
+ali i evaluacije s testnim skupom podataka što je bilo očekivano sukladno tome što je najveći te najpreciznniji model među korištenima. U nastavku su prikazane samo neke 
 slike koje su rezultat predviđanja prethodno spomenutog, najboljeg modela, na testnom skupu podataka.
 
 ![image](https://github.com/Kovinejtor/Parking-Slot-Detection/assets/95875142/181c1dde-a172-4881-ab19-bd80875bb42f)
